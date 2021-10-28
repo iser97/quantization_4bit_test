@@ -1,4 +1,5 @@
 # quantization for test
+This repository refers to [Chahal's blog](https://karanbirchahal.medium.com/aggressive-quantization-how-to-run-mnist-on-a-4-bit-neural-net-using-pytorch-5703f3faa599)
 
 ## 网络结构
 ```python
