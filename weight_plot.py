@@ -36,6 +36,6 @@ ax2.set_ylabel("Count")
 ax1.legend(loc="upper left", bbox_to_anchor=(0.4, 1.1), fontsize=12)
 ax2.legend(loc="upper right", bbox_to_anchor=(0.4, 1.1), fontsize=12)
 plt.show()
-plt.savefig('t.jpg')
+plt.savefig('figure.jpg')
 
         
