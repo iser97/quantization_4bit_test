@@ -151,8 +151,9 @@ def testQuant(model, test_loader, quant=False, stats=None, sym=False, num_bits=8
             correct += pred.eq(target.view_as(pred)).sum().item()
 
     test_loss /= len(test_loader.dataset)
-
+    f = open('test_acc.txt', mode='a+')
     print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n'.format(
         test_loss, correct, len(test_loader.dataset),
-        100. * correct / len(test_loader.dataset)))
+        100. * correct / len(test_loader.dataset)), file=f)
+    f.close()
 
