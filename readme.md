@@ -32,5 +32,5 @@ python main.py
 ```bash
 python weight_plot.py
 ```
-统计结果见图 ![weight_visualization](figure.jpg)
+统计结果见图 ![weight_visualization](./cache/figure.jpg)
 

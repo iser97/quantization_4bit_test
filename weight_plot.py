@@ -12,12 +12,13 @@ with open('weight.txt', mode='r', encoding='utf-8') as r:
             lines.append(json.loads(line))
 
 lines = [np.array(item["weight"]).flatten() for item in lines if "action" in item["name_scope"]]
+# lines = [np.array(item["weight"]).flatten() for item in lines]
 res = 0
 for line in lines:
     res = np.append(res, line)
 res = res[1:]
 c = Counter(res)
-x = range(0, 16)
+x = list(range(0, 16))
 y = list(c.values())
 y_sum = sum(y)
 y_prob = [item/y_sum for item in y]
@@ -36,4 +37,4 @@ ax2.set_ylabel("Count")
 ax1.legend(loc="upper left", bbox_to_anchor=(0.4, 1.1), fontsize=12)
 ax2.legend(loc="upper right", bbox_to_anchor=(0.4, 1.1), fontsize=12)
 plt.show()
-plt.savefig('figure.jpg')
+plt.savefig('./cache/mac.jpg')

@@ -9,36 +9,20 @@ from scripts.quant.normal_quant import testQuant
 from scripts.model import model_main
 from scripts.utils import gatherStats
 
-
-
-model = model_main()
-q_model = copy.deepcopy(model) 
 kwargs = {'num_workers': 1, 'pin_memory': True}
 test_loader = torch.utils.data.DataLoader(
     datasets.MNIST('../data', train=False, transform=transforms.Compose([
                        transforms.ToTensor(),
                        transforms.Normalize((0.1307,), (0.3081,))
                    ])),
-    batch_size=512, shuffle=True, **kwargs)
-stats = gatherStats(q_model, test_loader)
-# testQuant(q_model, test_loader, quant=True, num_bits=8, stats=stats, sym=True)
-testQuant(q_model, test_loader, quant=False, num_bits=8, stats=stats, sym=True)
-
-
-model, old_stats = mainQuantAware()
-kwargs = {'num_workers': 1, 'pin_memory': True}
-test_loader = torch.utils.data.DataLoader(
-    datasets.MNIST('../data', train=False, transform=transforms.Compose([
+    batch_size=10000, shuffle=True, **kwargs)
+train_loader = torch.utils.data.DataLoader(
+    datasets.MNIST('../data', train=True, transform=transforms.Compose([
                        transforms.ToTensor(),
                        transforms.Normalize((0.1307,), (0.3081,))
                    ])),
-    batch_size=64, shuffle=True, **kwargs)
-
-"""## Test Quant Aware """
-
-print(old_stats)
-
-import copy
-q_model = copy.deepcopy(model)
-
-testQuantAware_last(q_model, test_loader, stats=old_stats, sym=False, num_bits=4, record=True)
+    batch_size=60000, shuffle=True, **kwargs)
+for data, target in test_loader:
+    x = FakeQuantOp.apply(data, 4, True, 'test_input')
+for data, target in train_loader:
+    x = FakeQuantOp.apply(data, 4, True, 'train_input')

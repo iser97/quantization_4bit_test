@@ -23,7 +23,7 @@ def record_tensor(tensor, tensor_name_scope):
     dic = {'name_scope':tensor_name_scope, 'weight':weight, 'scale':scale, 'zero_point':zero_point, 'shape':shape}
     dic = json.dumps(dic)
     dic = dic + '\n'
-    print(dic, file=open('weight.txt', mode='a+', encoding='utf-8'))  
+    print(dic, file=open('{}.txt'.format(tensor_name_scope), mode='a+', encoding='utf-8'))  
 
 class FakeQuantOp(torch.autograd.Function):
     @staticmethod
